@@ -9,7 +9,7 @@ class CheckoutStepOnePage(BasePage):
     CONTINUE_BUTTON = (By.CSS_SELECTOR, "[data-test='continue']")
 
     def is_loaded(self):
-        return self.wait_for_text(self.TITLE, "Checkout: Your Information")
+        return self.find_element(self.CONTINUE_BUTTON).is_displayed()
 
     def fill_form_and_continue(self, first_name, last_name, postal_code):
         self.type(self.FIRST_NAME_INPUT, first_name)

@@ -19,6 +19,7 @@ class TestSauceDemo:
         options.add_argument("--window-size=1920,1080")
         
         self.driver = webdriver.Chrome(options=options)
+        self.driver.set_window_size(1920, 1080)
         
         yield
         

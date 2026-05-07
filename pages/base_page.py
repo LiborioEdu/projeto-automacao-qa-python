@@ -26,8 +26,14 @@ class BasePage:
         return self.wait.until(EC.presence_of_all_elements_located(locator))
 
     def wait_for_text(self, locator, text):
-        # Aguarda ativamente o texto mudar antes de seguir (ideal para SPAs onde a div title permanece na transição)
+        # Aguarda ativamente o texto mudar, de forma Case-Insensitive.
+        # Chrome Headless em CI pode retornar upper-case dependendo do CSS text-transform.
         try:
-            return self.wait.until(EC.text_to_be_present_in_element(locator, text))
+            def _text_match_case_insensitive(driver):
+                elements = driver.find_elements(*locator)
+                if not elements:
+                    return False
+                return text.lower() in elements[0].text.lower()
+            return self.wait.until(_text_match_case_insensitive)
         except:
             return False
