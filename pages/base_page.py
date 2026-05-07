@@ -24,3 +24,10 @@ class BasePage:
 
     def find_elements(self, locator):
         return self.wait.until(EC.presence_of_all_elements_located(locator))
+
+    def wait_for_text(self, locator, text):
+        # Aguarda ativamente o texto mudar antes de seguir (ideal para SPAs onde a div title permanece na transição)
+        try:
+            return self.wait.until(EC.text_to_be_present_in_element(locator, text))
+        except:
+            return False

@@ -6,7 +6,7 @@ class CheckoutStepTwoPage(BasePage):
     FINISH_BUTTON = (By.CSS_SELECTOR, "[data-test='finish']")
 
     def is_loaded(self):
-        return self.get_text(self.TITLE) == "Checkout: Overview"
+        return self.wait_for_text(self.TITLE, "Checkout: Overview")
         
     def finish_checkout(self):
         self.click(self.FINISH_BUTTON)

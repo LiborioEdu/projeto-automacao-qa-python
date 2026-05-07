@@ -7,7 +7,7 @@ class CartPage(BasePage):
     CHECKOUT_BUTTON = (By.CSS_SELECTOR, "[data-test='checkout']")
     
     def is_loaded(self):
-        return self.get_text(self.TITLE) == "Your Cart"
+        return self.wait_for_text(self.TITLE, "Your Cart")
 
     def get_number_of_items(self):
         items = self.find_elements(self.CART_ITEMS)

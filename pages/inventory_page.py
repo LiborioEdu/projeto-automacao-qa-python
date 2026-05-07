@@ -8,7 +8,7 @@ class InventoryPage(BasePage):
     CART_LINK = (By.CSS_SELECTOR, "[data-test='shopping-cart-link']")
 
     def is_loaded(self):
-        return self.get_text(self.TITLE) == "Products"
+        return self.wait_for_text(self.TITLE, "Products")
 
     def add_backpack_to_cart(self):
         self.click(self.ADD_TO_CART_BACKPACK)

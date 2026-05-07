@@ -6,7 +6,7 @@ class CheckoutCompletePage(BasePage):
     COMPLETE_HEADER = (By.CSS_SELECTOR, "[data-test='complete-header']")
 
     def is_loaded(self):
-        return self.get_text(self.TITLE) == "Checkout: Complete!"
+        return self.wait_for_text(self.TITLE, "Checkout: Complete!")
         
     def get_success_message(self):
         return self.get_text(self.COMPLETE_HEADER)
