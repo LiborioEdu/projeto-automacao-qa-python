@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 
 class InventoryPage(BasePage):
@@ -17,4 +18,7 @@ class InventoryPage(BasePage):
         return int(self.get_text(self.CART_BADGE))
 
     def open_cart(self):
-        self.click(self.CART_LINK)
+        # Utiliza JS Click para contornar problemas de Phantom Interception no Headless Mode
+        # O badge ou child elements do SVG às vezes "engolem" o clique normal do Selenium na nuvem.
+        element = self.wait.until(EC.presence_of_element_located(self.CART_LINK))
+        self.driver.execute_script("arguments[0].click();", element)
