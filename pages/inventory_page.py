@@ -1,0 +1,20 @@
+from selenium.webdriver.common.by import By
+from pages.base_page import BasePage
+
+class InventoryPage(BasePage):
+    TITLE = (By.CSS_SELECTOR, "[data-test='title']")
+    ADD_TO_CART_BACKPACK = (By.CSS_SELECTOR, "[data-test='add-to-cart-sauce-labs-backpack']")
+    CART_BADGE = (By.CSS_SELECTOR, "[data-test='shopping-cart-badge']")
+    CART_LINK = (By.CSS_SELECTOR, "[data-test='shopping-cart-link']")
+
+    def is_loaded(self):
+        return self.get_text(self.TITLE) == "Products"
+
+    def add_backpack_to_cart(self):
+        self.click(self.ADD_TO_CART_BACKPACK)
+
+    def get_cart_item_count(self):
+        return int(self.get_text(self.CART_BADGE))
+
+    def open_cart(self):
+        self.click(self.CART_LINK)
